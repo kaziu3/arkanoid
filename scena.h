@@ -12,12 +12,14 @@ class cScena{
 protected:
 	int aktywny;
 	vector<cFigura*> figury;
+	int punkty;
 public:
 	cScena();
 	void rysuj();
 	void inicjuj();
 	void aktualizuj();
 	void init();
+	void mysz(int button, int state, int x, int y);
 };
 extern cScena scena;
 

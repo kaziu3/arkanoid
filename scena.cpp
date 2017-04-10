@@ -1,4 +1,5 @@
 #include "scena.h"
+#include "cKlocek.h"
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 
@@ -8,6 +9,10 @@ cScena scena;
 void przerysuj()
 {
 	scena.rysuj();
+}
+/*******************/
+void mysz(int button, int state, int x, int y){
+	scena.mysz(button, state, x, y);
 }
 /*******************/
 cScena::cScena(){
@@ -21,17 +26,34 @@ void idle()
 	Sleep(1);
 }
 /********************/
+void cScena::mysz(int button, int state, int x, int y){
+	if (button == GLUT_LEFT_BUTTON)
+	{
+		float xs = -1 + (2.0 / 800)*x;
+		float ys = 1 - (2.0 / 800)*y;
+		for (int i = 0; i < figury.size(); i++)
+			if (figury[i]->czy_kliknieto(x, y) == 1)
+			{
+				aktywny = i;
+			}
+	}	glutPostRedisplay();
+}
+/********************/
 void cScena::aktualizuj()
 {
 	int czas = GetTickCount(); //zwraca czas w [ms]
-	for (int i = 0; i< figury.size() - 1; i++)
+	for (int i = 0; i< figury.size() ; i++)
 		figury[i]->Aktualizuj(czas); //obliczanie nowych polozen
 	//wykrywanie kolizji
 	for (int i = 0; i< figury.size() - 1; i++)
-	for (int j = i + 1; j<figury.size() - 1; j++)
+	for (int j = i + 1; j<figury.size() ; j++)
 	if (figury[i]->Kolizja(*figury[j])) //znajduje kolizje
 	{
-	// tu mozna zareagowac na kolizje np. usuwajac „zbity” obiekt itp...
+		cKlocek*k = dynamic_cast<cKlocek*>(figury[j]);
+		if (k != NULL)
+		{
+			punkty += k->punkty();
+		}
 	}
 }
 /*******************/
@@ -53,10 +75,10 @@ void cScena::init()
 	okr->setFizyka(8.91*1E-6, -90);
 	okr->przesun(0, 0.2);
 	figury.push_back(okr);
-	cProstokat *pr0 = new cProstokat(0.2, 0.6);
+	cProstokat *pr0 = new cProstokat(0.1, 0.6);
 	pr0->setPredkosc(0, 0);
 	pr0->setFizyka(0, 0);
-	pr0->przesun(0, -0.4);
+	pr0->przesun(0, -0.8);
 	figury.push_back(pr0);
 	cProstokat *pr1 = new cProstokat(0.6, 0.2);
 	pr1->przesun(-0.4, -0.2);
@@ -79,6 +101,7 @@ void cScena::inicjuj(){
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_COLOR_MATERIAL);
 	glutDisplayFunc(::przerysuj);
+	glutMouseFunc(::mysz);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1, 1, -1, 1, -.1, .1);

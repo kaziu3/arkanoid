@@ -9,6 +9,7 @@ protected:
 public:
 	cOkrag();
 	cOkrag(float _r);
+	bool czy_kliknieto(float xf, float yf);
 	void rysuj();
 };
 #endif

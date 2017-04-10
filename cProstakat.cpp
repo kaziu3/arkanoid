@@ -9,7 +9,7 @@ cProstokat::cProstokat(){
 cProstokat::cProstokat(float _h, float _w)
 {
 	w = _w; h = _h; 
-	setGeometria(x, y, x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2));
+	setGeometria(x, y, -(w / 2), -(h / 2),  (w / 2),  (h / 2));
 }
 /**************************/
 void cProstokat::rysuj(){
@@ -28,5 +28,16 @@ void cProstokat::rysuj(){
 	}
 	glEnd();
 	glPopMatrix();
+}
+/****************************/
+bool cProstokat::czy_kliknieto(float xf, float yf){
+	if (fabs(xf - x) < w / 2 && fabs(yf - y) < h / 2)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 /****************************/

@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 
 	glutInit(&argc, argv);
-	scena.inicjuj();//
+	scena.inicjuj(); //inicjuj
 	glutMainLoop();
 
 	return 0;

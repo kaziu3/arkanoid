@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="cFigura.h" />
+    <ClInclude Include="cKlocek.h" />
     <ClInclude Include="fizyka.h" />
     <ClInclude Include="cOkrag.h" />
     <ClInclude Include="cProstokat.h" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cFigura.cpp" />
+    <ClCompile Include="cKolcek.cpp" />
     <ClCompile Include="cOkrag.cpp" />
     <ClCompile Include="cProstakat.cpp" />
     <ClCompile Include="fizyka.cpp" />

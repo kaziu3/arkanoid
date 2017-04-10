@@ -21,6 +21,7 @@ public:
 	void przesun(float dx, float dy);
 	void idz_do(float q, float r);
 	void ustaw_kolor(float r, float g, float b);
+	virtual bool czy_kliknieto(float xf, float yf) = 0;
 
 };
 #endif

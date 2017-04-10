@@ -11,6 +11,7 @@ protected:
 public:
 	cProstokat();
 	cProstokat(float _h, float _w);
+	bool czy_kliknieto(float xf, float yf);
 	void rysuj();
 };
 

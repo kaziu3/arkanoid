@@ -7,7 +7,7 @@ cOkrag::cOkrag(){
 cOkrag::cOkrag(float _r)
 {
 	r = _r;
-	setGeometria(x, y, x - r, y - r, x + r, y + r);
+	setGeometria(x, y, -r, -r,  r,  r);
 }
 /************************/
 void cOkrag::rysuj(){
@@ -20,11 +20,22 @@ void cOkrag::rysuj(){
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < 360; i += 1) {
 		float i_rad = i*PI / (float)180;
-		float pos_x = x + r * cos(i_rad);
-		float pos_y = y + r * sin(i_rad);
+		float pos_x =  r * cos(i_rad);
+		float pos_y = r * sin(i_rad);
 		glVertex2f(pos_x, pos_y);
 	}
 	glEnd();
 	glPopMatrix();
+}
+/**********************************************/
+bool cOkrag::czy_kliknieto(float xf, float yf){
+	if (fabs(xf - x) < r&&fabs(yf - y) < r)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 /**********************************************/
